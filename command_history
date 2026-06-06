@@ -1,0 +1,6 @@
+git init
+git remote add origin https://github.com/vyasparivar/vyasparivar.github.io.git
+git branch -M main
+git remote add chirpy-starter git@github.com:cotes2020/chirpy-starter.git
+git pull chirpy main --allow-unrelated-histories
+git push -u origin main
