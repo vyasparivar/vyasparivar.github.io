@@ -38,14 +38,14 @@ document.addEventListener("DOMContentLoaded", function() {
             headerFilter: true
           };
 
-          if (key.toLowerCase() === "feedback1" || key.toLowerCase() === "feedback2") {
+          if (key.toLowerCase() === "સ્નેહ મિલન" || key.toLowerCase() === "આયોજન" || key.toLowerCase() === "ભોજન વ્યવસ્થા" || key.toLowerCase() === "બેઠક વ્યવસ્થા" || key.toLowerCase() === "કાર્યકર્તાઓનો સહકાર" ) {
             colConfig.formatter = "star"; 
             colConfig.headerFilter = false; 
             colConfig.hozAlign = "center"; 
             colConfig.width = 120; 
           }
 
-          if (key.toLowerCase() === "comment") {
+          /*if (key.toLowerCase() === "comment")*/else {
             colConfig.formatter = "textarea"; 
             colConfig.widthGrow = 2; 
           }

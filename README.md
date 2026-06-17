@@ -1,39 +1,66 @@
-# Chirpy Starter
+# 🚩 વ્યાસ પરિવાર ડિજિટલ પ્લેટફોર્મ (vyasparivar.github.io)
 
-[![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy)][gem]&nbsp;
-[![GitHub license](https://img.shields.io/github/license/cotes2020/chirpy-starter.svg?color=blue)][mit]
+જય શ્રી કૃષ્ણ! વ્યાસ પરિવારની સત્તાવાર વેબસાઇટના ઓપન-સોર્સ કોડબેઝ (GitHub Repository) માં આપનું હાર્દિક સ્વાગત છે. આ પ્લેટફોર્મનો મુખ્ય ઉદ્દેશ્ય આપણા સમગ્ર વ્યાસ પરિવારને ડિજિટલી એક તાંતણે બાંધવાનો, સમાજના અહેવાલો, નાણાકીય હિસાબ-કિતાબ, તેજસ્વી તારલાઓની યાદી, જન્મદિવસ તેમજ અવસાન નોંધ જેવી વિગતો પારદર્શક રીતે સૌ સુધી પહોંચાડવાનો છે.
 
-A minimal, ready-to-use template for creating a blog with the [**Chirpy**][chirpy] Jekyll theme. Get up and running in minutes with all critical files pre-configured.
+આ એક સંપૂર્ણ ઓપન-સોર્સ (Open-source) પ્રોજેક્ટ છે. જો આપ વ્યાસ પરિવારના સભ્ય હોવ અને સમાજ માટે ટેકનિકલ કે કન્ટેન્ટના માધ્યમથી કોઈ યોગદાન (Contribution) આપવા માંગતા હોવ, તો આપનું અહી સ્વાગત છે!
 
-## Why This Starter Exists
+---
 
-When installing Chirpy through [RubyGems.org][gem], Jekyll can only read a subset of theme files (`_data`, `_layouts`, `_includes`, `_sass`, `assets`) and limited `_config.yml` options from the gem. As a result, users cannot enjoy the full out-of-the-box experience that Chirpy offers.
+## 💻 ડેવલપર્સ માટે ટેકનિકલ માહિતી (Project Stack)
 
-To unlock all features, the following files must be present in your Jekyll site:
+આ વેબસાઇટ અત્યારની આધુનિક ટેકનોલોજીનો ઉપયોગ કરીને બનાવવામાં આવી છે, જેથી સમાજના અન્ય ડેવલપર્સ આને સરળતાથી સમજી શકે:
 
-```shell
-.
-├── _config.yml
-├── _plugins
-├── _tabs
-└── index.html
-```
+*   **Static Site Generator:** [Jekyll 4.x](https://jekyllrb.com/) (Ruby આધારિત)
+*   **Theme:** [Jekyll Theme Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy) (સંપૂર્ણ રિસ્પોન્સિવ અને PWA સપોર્ટેડ)
+*   **Frontend & UI:** HTML5, CSS3, JavaScript (jQuery)
+*   **Interactive Tables:** [DataTables.net](https://datatables.net/) (લાઇવ સર્ચ અને સોર્ટિંગ માટે)
+*   **Hosting:** GitHub Pages (સંપૂર્ણ ફ્રી અને સેફ)
 
-This starter bundles those files from the latest **Chirpy** release along with a [CD][CD] workflow, so you can start writing immediately.
+### પ્રોજેક્ટનું મુખ્ય સ્ટ્રક્ચર:
+*   `_posts/` : આ ફોલ્ડરમાં બધા જ બ્લોગ, અહેવાલો અને ઇવેન્ટ્સની માર્કડાઉન (`.md`) ફાઇલો રહેશે.
+*   `_tabs/` : મુખ્ય પેજીસ જેવા કે આર્કાઈવ્ઝ, કેટેગરીઝ, ટેગ્સ અને અબાઉટ સેક્શન.
+*   `assets/` : ફોટા (Images), કસ્ટમ CSS અને જાવાસ્ક્રિપ્ટ ફાઇલો માટે.
 
-## Usage
+---
 
-Check out the [theme's docs](https://github.com/cotes2020/jekyll-theme-chirpy/wiki).
+## 🤝 યોગદાન કેવી રીતે આપવું? (How to Contribute)
 
-## Contributing
+આ પ્રોજેક્ટમાં આપ બે રીતે યોગદાન આપી શકો છો: **ટેકનિકલ કોડિંગ** દ્વારા અથવા **લેખક (Author)** બનીને બ્લોગ/પોસ્ટ લખીને.
 
-This repository is automatically updated with new releases from the theme repository. If you encounter any issues or want to contribute to its improvement, please visit the [theme repository][chirpy] to provide feedback.
+### ૧. કોડ અથવા ફીચર્સમાં સુધારો કરવા માટે (For Developers):
+1.  સૌથી પહેલા આ રેપોઝીટરીને **Fork** કરો.
+2.  આપના લોકલ કમ્પ્યુટરમાં પ્રોજેક્ટને `git clone` કરો.
+3.  આપ જે નવું ફીચર (જેમ કે નવું ડેટાટેબલ, બર્થડે કેલેન્ડર વગેરે) ઉમેરવા માંગતા હોવ તેના માટે નવી બ્રાન્ચ બનાવો:  
+    `git checkout -b feature/new-awesome-feature`
+4.  સુધારા કર્યા બાદ કોડ પુશ કરી એક સરસ **Pull Request (PR)** ક્રિએટ કરો.
 
-## License
+### ૨. લેખક (Author) બનીને બ્લોગ કે પોસ્ટ લખવા માટે (For Writers):
+જો આપ સમાજલક્ષી વિચારો, વાર્તાઓ, પ્રેરણાદાયી આર્ટિકલ્સ કે ઇવેન્ટના અહેવાલો વેબસાઇટ પર પબ્લિશ કરવા માંગતા હોવ, તો આપ પોતે લેખક બનીને પોસ્ટ સબમિટ કરી શકો છો:
+1.  આ રેપોને **Fork** કરો.
+2.  `_posts/` ફોલ્ડરની અંદર ચિર્પી થીમના ફોર્મેટ મુજબ નવી માર્કડાઉન ફાઇલ બનાવો. ફાઇલનું નામ આ ફોર્મેટમાં હોવું ફરજિયાત છે: `YYYY-MM-DD-your-post-title.md`
+3.  ફાઇલની શરૂઆતમાં આ મુજબનું Front Matter (મેટાડેટા) સેટ કરો:
+```markdown
+    ---
+    title: "આપનો ગુજરાતીમાં સુંદર વિષય"
+    date: YYYY-MM-DD HH:MM:SS +0530
+    author: આપનું નામ
+    categories: [blog]
+    tags: [વાર્તા, પ્રેરણાદાયી]
+    ---
+    અહીં આપનો આખો આર્ટિકલ ગુજરાતીમાં વિગતવાર લખો...
+    ```
+4.  ફાઇલ સેવ કરી ગીટહબ પર **PR (Pull Request)** જનરેટ કરો. અમારી ટીમ આપના બ્લોગનું રિવ્યુ કરશે અને યોગ્ય જણાતા જ PR Merge કરીને તેને વેબસાઇટ પર આપના નામ સાથે **Publish** કરવામાં આવશે.
 
-This work is published under [MIT][mit] License.
+---
 
-[gem]: https://rubygems.org/gems/jekyll-theme-chirpy
-[chirpy]: https://github.com/cotes2020/jekyll-theme-chirpy/
-[CD]: https://en.wikipedia.org/wiki/Continuous_deployment
-[mit]: https://github.com/cotes2020/chirpy-starter/blob/master/LICENSE
+## ✉️ અમારો સંપર્ક કરો (Direct Contact)
+
+જો આપ ગીટહબ કે પીઆર (PR) ની સિસ્ટમથી પરિચિત ન હોવ અને ડાયરેક્ટ કોઈ માહિતી, સુધારો કે બ્લોગ મોકલવા માંગતા હોવ, અથવા ટીમનો સીધો સંપર્ક કરવા માંગતા હોવ તો આપ મને ડાયરેક્ટ ઈમેલ કરી શકો છો:
+
+*   **📧 ઇમેલ આઇડી:** [vyasparivar5@gmail.com]
+*   **🌐 લાઈવ વેબસાઈટ:** [vyasparivar.github.io](https://vyasparivar.github.io)
+
+---
+**સૌના સાથ અને સહકારથી જ આપણો સમાજ પ્રગતિના પંથે આગળ વધશે. આપના અમૂલ્ય યોગદાનની અપેક્ષા સહ...**
+
+**જય શ્રી કૃષ્ણ 🙏**
