@@ -110,8 +110,7 @@ document.addEventListener("DOMContentLoaded", function() {
           }
 
           if (key.toLowerCase() === "નામ") {
-            colConfig.formatter = "star"; 
-            colConfig.headerFilter = false; 
+            
             colConfig.hozAlign = "left"; 
             colConfig.width = 120; 
             /*colConfig.widthGrow = 2; */
