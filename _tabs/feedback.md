@@ -5,6 +5,63 @@ order: 5
 script: true
 ---
 
+<style>
+  /* આખું ટેબલ અને એના હેડરનો કલર ચિર્પી થીમ જેવો કરવા */
+  .tabulator {
+    background-color: var(--main-bg) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--tb-border-color, #e9ecef) !important;
+    font-family: inherit !important;
+  }
+
+  /* હેડર રો (Header Row) નો કલર */
+  .tabulator .tabulator-header {
+    background-color: var(--panel-bg, #f8f9fa) !important;
+    color: var(--text-color) !important;
+    border-bottom: 2px solid var(--tb-border-color, #dee2e6) !important;
+  }
+
+  /* હેડરની અંદરના ફિલ્ટર બોક્સ */
+  .tabulator .tabulator-header .tabulator-header-filter input {
+    background-color: var(--main-bg) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--tb-border-color, #ccc) !important;
+    border-radius: 4px;
+    padding: 4px;
+  }
+
+  /* ટેબલની અંદરની રો (Rows) નો કલર */
+  .tabulator .tabulator-tableholder .tabulator-table .tabulator-row {
+    background-color: var(--main-bg) !important;
+    color: var(--text-color) !important;
+    border-bottom: 1px solid var(--tb-border-color, #eee) !important;
+  }
+
+  /* એક છોડીને એક રો નો કલર (Aka Zebra Striping) */
+  .tabulator .tabulator-tableholder .tabulator-table .tabulator-row.tabulator-row-even {
+    background-color: var(--panel-bg, #fdfdfd) !important;
+  }
+
+  /* પેજિનેશન બાર (નીચેનું નેવિગેશન) */
+  .tabulator .tabulator-footer {
+    background-color: var(--panel-bg, #f8f9fa) !important;
+    color: var(--text-color) !important;
+    border-top: 1px solid var(--tb-border-color, #dee2e6) !important;
+  }
+
+  /* પેજિનેશનના બટન્સ */
+  .tabulator .tabulator-footer .tabulator-page {
+    background-color: var(--main-bg) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--tb-border-color, #ccc) !important;
+  }
+  
+  .tabulator .tabulator-footer .tabulator-page.active {
+    background-color: var(--link-color, #007bff) !important;
+    color: #fff !important;
+  }
+</style>
+
 <div id="feedbackTable" style="margin: 20px 0;"></div>
 
 <link href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css" rel="stylesheet">
@@ -27,6 +84,9 @@ document.addEventListener("DOMContentLoaded", function() {
   Papa.parse(CSV_URL, {
     download: true,
     header: true,
+    worker: true,
+    fastMode: true,
+    skipEmptyLines: true,
     complete: function(res) {
       if (res.data && res.data.length > 0) {
         
@@ -57,6 +117,8 @@ document.addEventListener("DOMContentLoaded", function() {
           data: res.data,
           columns: columns,
           layout: "fitColumns",
+          height: "600px",
+          progressiveRender: true,
           pagination: true,
           paginationSize: 5,
           placeholder: "ડેટા લોડ થઈ રહ્યો છે અથવા કોઈ રેકોર્ડ નથી...",
