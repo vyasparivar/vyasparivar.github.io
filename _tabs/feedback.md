@@ -105,9 +105,16 @@ document.addEventListener("DOMContentLoaded", function() {
             colConfig.width = 120; 
           }
 
-          /*if (key.toLowerCase() === "comment")*/else {
+          if (key.toLowerCase() === "શું સૌથી વધુ ગમીયુ?" || key.toLowerCase() === "ભૂલ કે ફરિયાદ" || key.toLowerCase() === "સુધારો લાવવાની જરૂર છે" || key.toLowerCase() === "દિલથી સંદેશ/સૂચન") {
             colConfig.formatter = "textarea"; 
-            colConfig.widthGrow = 2; 
+          }
+
+          if (key.toLowerCase() === "નામ") {
+            colConfig.formatter = "star"; 
+            colConfig.headerFilter = false; 
+            colConfig.hozAlign = "left"; 
+            colConfig.width = 120; 
+            /*colConfig.widthGrow = 2; */
           }
 
           return colConfig;
