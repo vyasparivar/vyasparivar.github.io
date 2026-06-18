@@ -12,7 +12,7 @@ script: true
     color: var(--text-color) !important;
     border: 1px solid var(--tb-border-color, #e9ecef) !important;
     font-family: inherit !important;
-    height: auto !important; /* Allows table to expand naturally */
+    height: auto !important; 
   }
 
   /* Header row style */
@@ -37,13 +37,11 @@ script: true
     overflow: visible !important;
   }
 
-  /* Individual data row style */
-  .tabulator .tabulator-tableholder .tabulator-table .tabulator-row {
-    background-color: var(--main-bg) !important;
-    color: var(--text-color) !important;
-    border-bottom: 1px solid var(--tb-border-color, #eee) !important;
-    min-height: 40px !important;
+  /* 🎯 Your custom spacing fix applied perfectly here */
+  .tabulator-row.tabulator-selectable.tabulator-row-odd,
+  .tabulator-row.tabulator-selectable.tabulator-row-even {
     height: auto !important;
+    min-height: 40px !important;
   }
 
   /* Reduce spacing inside cells */
@@ -78,14 +76,10 @@ script: true
   }
 
   /* Star colors */
-  .tabulator-cell .tabulator-star-inactive {
-    color: #ccc !important; 
-  }
-  .tabulator-cell .tabulator-star-active {
-    color: #ffc107 !important; 
-  }
+  .tabulator-cell .tabulator-star-inactive { color: #ccc !important; }
+  .tabulator-cell .tabulator-star-active { color: #ffc107 !important; }
 
-  /* --- 2. Responsive Mobile Layout: Collapse Everything Except "નામ" --- */
+  /* --- 2. Responsive Mobile Layout --- */
   @media (max-width: 992px) {
     .tabulator .tabulator-header {
       display: none !important; 
@@ -138,7 +132,12 @@ script: true
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.5.3/papaparse.min.js"></script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
+/* 🚀 Function to initialize everything - wrapped to support Chirpy theme navigation */
+function initFeedbackTable() {
+  const tableContainer = document.getElementById("feedbackTable");
+  /* Prevent duplicate rendering if event fires twice */
+  if (!tableContainer || tableContainer.classList.contains("tabulator")) return;
+
   const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQvpD3g8-1llhdrJnJfHcYTia2UxD6FiMlNemfDRGlQVWslFi6GVFcjV7tMttbGNdOxPwn6Xg_AWUYG/pub?gid=610263309&single=true&output=csv";
 
   Papa.parse(CSV_URL, {
@@ -157,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function() {
             headerFilter: true
           };
 
-          if (key.toLowerCase() === "સ્નેહ મિલન" || key.toLowerCase() === "આયોજન" || key.toLowerCase() === "ભોજન વ્યવસ્થા" || key.toLowerCase() === "બેઠક વ્યવસ્થા" || key.toLowerCase() === "કાર્યકર્તાઓનો સહકાર" ) {
+          if (key.toLowerCase() === "સ્નેહ મિલન" || key.toLowerCase() === "આયોજન" || key.toLowerCase() === "ભોજન વ્યવસ્થા" || key.toLowerCase() === "બેઠક વ્યવ્ષા" || key.toLowerCase() === "કાર્યકર્તાઓનો સહકાર" ) {
             colConfig.formatter = "star"; 
             colConfig.headerFilter = false; 
             colConfig.hozAlign = "center"; 
@@ -176,22 +175,24 @@ document.addEventListener("DOMContentLoaded", function() {
           return colConfig;
         });
 
-        /* Get previously saved page number from localStorage (Default to page 1) */
-        let savedPage = localStorage.getItem("current_feedback_page") || 1;
-
         /* Main Tabulator initialization */
         const table = new Tabulator("#feedbackTable", {
           data: res.data,
           columns: columns,
-          layout: "fitColumns", /* This layout configuration keeps width perfect */
+          layout: "fitColumns",
           pagination: true,
           paginationSize: 12,
           placeholder: "ડેટા લોડ થઈ રહ્યો છે અથવા કોઈ રેકોર્ડ નથી...",
           
-          /* Set initial page to saved page number on load */
-          initialPage: parseInt(savedPage),
+          /* 🚀 Force table to jump to the saved page right after data is loaded and rendered */
+          dataRendered: function() {
+            let savedPage = localStorage.getItem("current_feedback_page");
+            if (savedPage) {
+              table.setPage(parseInt(savedPage)).catch(function(err){});
+            }
+          },
           
-          /* Listen for page change events and save the new page number */
+          /* Listen for explicit user clicks on page numbers and save it */
           pageLoaded: function(page) {
             localStorage.setItem("current_feedback_page", page);
           }
@@ -199,5 +200,12 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }
   });
-});
+}
+
+/* 🚀 Pjax / Turbo compatibility layer for Chirpy Theme */
+document.addEventListener("DOMContentLoaded", initFeedbackTable);
+document.addEventListener("pjax:success", initFeedbackTable);
+if (window.Chirpy) {
+  initFeedbackTable();
+}
 </script>
