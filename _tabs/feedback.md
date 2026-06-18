@@ -12,7 +12,7 @@ script: true
     color: var(--text-color) !important;
     border: 1px solid var(--tb-border-color, #e9ecef) !important;
     font-family: inherit !important;
-    height: auto !important;
+    height: auto !important; /* Allows table to expand naturally */
   }
 
   /* Header row style */
@@ -44,16 +44,12 @@ script: true
     border-bottom: 1px solid var(--tb-border-color, #eee) !important;
     min-height: 40px !important;
     height: auto !important;
-    display: flex !important;
-    align-items: flex-start !important; /* 🚀 🎯 આ લાઈન બધી કોલમના કન્ટેન્ટને ઉપર (Top) ગોઠવી રાખશે, જેથી વચ્ચે ગેપ ન વધે */
   }
 
-  /* Reduce spacing inside cells and align text to top */
+  /* Reduce spacing inside cells */
   .tabulator .tabulator-row .tabulator-cell {
-    padding: 8px 6px !important;
+    padding: 6px 4px !important;
     height: auto !important;
-    display: inline-block !important;
-    vertical-align: top !important; /* 🚀 🎯 મોટી કમેન્ટ વખતે નાની કોલમ્સ ઉપર ચોંટેલી રહેશે */
   }
 
   /* Zebra striping for even rows */
@@ -82,8 +78,12 @@ script: true
   }
 
   /* Star colors */
-  .tabulator-cell .tabulator-star-inactive { color: #ccc !important; }
-  .tabulator-cell .tabulator-star-active { color: #ffc107 !important; }
+  .tabulator-cell .tabulator-star-inactive {
+    color: #ccc !important; 
+  }
+  .tabulator-cell .tabulator-star-active {
+    color: #ffc107 !important; 
+  }
 
   /* --- 2. Responsive Mobile Layout: Collapse Everything Except "નામ" --- */
   @media (max-width: 992px) {
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function() {
             headerFilter: true
           };
 
-          if (key.toLowerCase() === "સ્નેહ મિલન" || key.toLowerCase() === "આયોજન" || key.toLowerCase() === "ભોજન વ્યવस्था" || key.toLowerCase() === "બેઠક વ્યવસ્થા" || key.toLowerCase() === "કાર્યકર્તાઓનો સહકાર" ) {
+          if (key.toLowerCase() === "સ્નેહ મિલન" || key.toLowerCase() === "આયોજન" || key.toLowerCase() === "ભોજન વ્યવસ્થા" || key.toLowerCase() === "બેઠક વ્યવસ્થા" || key.toLowerCase() === "કાર્યકર્તાઓનો સહકાર" ) {
             colConfig.formatter = "star"; 
             colConfig.headerFilter = false; 
             colConfig.hozAlign = "center"; 
@@ -176,20 +176,25 @@ document.addEventListener("DOMContentLoaded", function() {
           return colConfig;
         });
 
+        /* Get previously saved page number from localStorage (Default to page 1) */
+        let savedPage = localStorage.getItem("current_feedback_page") || 1;
+
         /* Main Tabulator initialization */
-        new Tabulator("#feedbackTable", {
+        const table = new Tabulator("#feedbackTable", {
           data: res.data,
           columns: columns,
-          layout: "fitColumns",
+          layout: "fitColumns", /* This layout configuration keeps width perfect */
           pagination: true,
           paginationSize: 12,
           placeholder: "ડેટા લોડ થઈ રહ્યો છે અથવા કોઈ રેકોર્ડ નથી...",
           
-          /* 🚀 🎯 આ બે લાઈન પેજ નંબરને બ્રાઉઝર મેમરીમાં સ્ટોર રાખશે, જેથી રીફ્રેશ કરવાથી પેજ ન બદલાય */
-          persistence: {
-            pages: true 
-          },
-          persistenceID: "feedback_table_page"
+          /* Set initial page to saved page number on load */
+          initialPage: parseInt(savedPage),
+          
+          /* Listen for page change events and save the new page number */
+          pageLoaded: function(page) {
+            localStorage.setItem("current_feedback_page", page);
+          }
         });
       }
     }
