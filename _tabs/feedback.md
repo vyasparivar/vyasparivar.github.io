@@ -12,7 +12,7 @@ script: true
     color: var(--text-color) !important;
     border: 1px solid var(--tb-border-color, #e9ecef) !important;
     font-family: inherit !important;
-    height: auto !important; /* Fixes the scrolling issue, allows table to expand */
+    height: auto !important; /* Allows table to expand naturally */
   }
 
   /* Header row style */
@@ -28,21 +28,28 @@ script: true
     color: var(--text-color) !important;
     border: 1px solid var(--tb-border-color, #ccc) !important;
     border-radius: 4px;
-    padding: 4px;
+    padding: 2px 4px !important; /* Reduced padding for tighter look */
   }
 
-  /* Data rows container and visible overflow to prevent page jump */
+  /* Data rows container */
   .tabulator .tabulator-tableholder {
     height: auto !important; 
     overflow: visible !important;
   }
 
-  /* Individual data row style */
+  /* Individual data row style - REDUCED SPACING HERE */
   .tabulator .tabulator-tableholder .tabulator-table .tabulator-row {
     background-color: var(--main-bg) !important;
     color: var(--text-color) !important;
     border-bottom: 1px solid var(--tb-border-color, #eee) !important;
-    min-height: 60px;
+    min-height: 40px !important; /* Reduced from 60px */
+    height: auto !important; /* Allows cell to size independently */
+  }
+
+  /* Reduce spacing inside cells */
+  .tabulator .tabulator-row .tabulator-cell {
+    padding: 6px 4px !important; /* Tighter padding to eliminate extra vertical spacing */
+    height: auto !important;
   }
 
   /* Zebra striping for even rows */
@@ -55,12 +62,14 @@ script: true
     background-color: var(--panel-bg, #f8f9fa) !important;
     color: var(--text-color) !important;
     border-top: 1px solid var(--tb-border-color, #dee2e6) !important;
+    padding: 4px 8px !important;
   }
 
   .tabulator .tabulator-footer .tabulator-page {
     background-color: var(--main-bg) !important;
     color: var(--text-color) !important;
     border: 1px solid var(--tb-border-color, #ccc) !important;
+    padding: 3px 6px !important;
   }
   
   .tabulator .tabulator-footer .tabulator-page.active {
@@ -78,12 +87,10 @@ script: true
 
   /* --- 2. Responsive Mobile Layout: Collapse Everything Except "નામ" --- */
   @media (max-width: 992px) {
-    /* Hide the main header on mobile */
     .tabulator .tabulator-header {
       display: none !important; 
     }
     
-    /* Convert each row into an isolated card */
     .tabulator .tabulator-row {
       display: block !important;
       height: auto !important;
@@ -93,7 +100,6 @@ script: true
       border-radius: 6px !important;
     }
 
-    /* Convert cells into vertical full-width blocks */
     .tabulator .tabulator-row .tabulator-cell {
       display: block !important;
       width: 100% !important;
@@ -103,7 +109,6 @@ script: true
       text-align: left !important;
     }
 
-    /* Dynamically insert column titles as prefix for all fields except "નામ" */
     .tabulator .tabulator-row .tabulator-cell[tabulator-field]:not([tabulator-field="નામ"]) {
       padding-left: 5px !important;
     }
@@ -115,7 +120,6 @@ script: true
       margin-right: 5px;
     }
 
-    /* Highlight the main profile column "નામ" on top of the card */
     .tabulator .tabulator-row .tabulator-cell[tabulator-field="નામ"] {
       font-size: 1.25rem !important;
       font-weight: bold !important;
@@ -140,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function() {
   Papa.parse(CSV_URL, {
     download: true,
     header: true,
-    worker: true, /* Run parser in background thread to prevent browser freezing */
+    worker: true, /* Run parser in background thread */
     fastMode: false, /* Keep false to handle multiline paragraphs correctly */
     skipEmptyLines: true,
     complete: function(res) {
@@ -149,7 +153,6 @@ document.addEventListener("DOMContentLoaded", function() {
         /* Map dynamically generated headers from Google Sheet */
         const columns = Object.keys(res.data[0]).map(function(key) {
           
-          /* Default settings for all columns */
           let colConfig = {
             title: key,
             field: key,
@@ -183,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function() {
           data: res.data,
           columns: columns,
           layout: "fitColumns", /* Clean horizontal distribution on desktop screen */
-          dataLayout: "textarea", /* Automatically adjusts individual row heights depending on paragraph length */
+          /* 🚀 Removed 'dataLayout: "textarea"' to fix the global row-stretching / heavy spacing bug */
           pagination: true,
           paginationSize: 12, /* Renders exactly 12 records per page view */
           placeholder: "ડેટા લોડ થઈ રહ્યો છે અથવા કોઈ રેકોર્ડ નથી..."
