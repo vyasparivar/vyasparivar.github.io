@@ -2,7 +2,7 @@
 layout: page
 title: પ્રતિસાદ
 icon: fas fa-star
-order: 2
+order: ૩ 
 script: true
 ---
 
