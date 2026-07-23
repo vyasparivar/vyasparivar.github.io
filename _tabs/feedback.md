@@ -1,7 +1,8 @@
 ---
-title: Feedback
+layout: page
+title: પ્રતિસાદ
 icon: fas fa-star
-order: 5
+order: 2
 script: true
 ---
 
