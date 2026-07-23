@@ -1,0 +1,57 @@
+# Chirpy Theme માટે મેન્યુઅલ ડિપ્લોયમેન્ટ નો ફાઈનલ કોડ
+
+name: Deploy Jekyll site to Pages
+
+on:
+  # ઓટો-ડિપ્લોય (Push trigger) હટાવી દીધું છે.
+  # હવે ફક્ત Actions ટેબમાંથી "Run workflow" બટન દબાવવાથી જ સાઈટ ડિપ્લોય થશે.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# જૂના અડધા બનેલા બિલ્ડને ઓટો-કેન્સલ કરશે જેથી Artifact conflict ના થાય
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build with Jekyll
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
