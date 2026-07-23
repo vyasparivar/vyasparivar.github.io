@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function() {
           };
 
           /* Rating columns transformation into graphical stars */
-          if (key.toLowerCase() === "સ્નેહ મિલન" || key.toLowerCase() === "આયોજન" || key.toLowerCase() === "ભોજન વ્યવસ્થા" || key.toLowerCase() === "બેઠક વ્યવસ્થા" || key.toLowerCase() === "કાર્યકર્તાઓનો સહકાર" ) {
+          if (key.toLowerCase() === "overall" || key.toLowerCase() === "management" || key.toLowerCase() === "food" || key.toLowerCase() === "seating" || key.toLowerCase() === "support" ) {
             colConfig.formatter = "star"; 
             colConfig.headerFilter = false; 
             colConfig.hozAlign = "center"; 
@@ -175,12 +175,12 @@ document.addEventListener("DOMContentLoaded", function() {
           }
 
           /* Auto wrap long text descriptions seamlessly */
-          if (key.toLowerCase() === "શું સૌથી વધુ ગમીયુ?" || key.toLowerCase() === "ભૂલ કે ફરિયાદ" || key.toLowerCase() === "સુધારો લાવવાની જરૂર છે" || key.toLowerCase() === "દિલથી સંદેશ/સૂચન") {
+          if (key.toLowerCase() === "like" || key.toLowerCase() === "complain" || key.toLowerCase() === "suggestion" || key.toLowerCase() === "feedback") {
             colConfig.formatter = "textarea"; 
           }
 
           /* Identity column profile sizing */
-          if (key.toLowerCase() === "નામ") {
+          if (key.toLowerCase() === "name") {
             colConfig.hozAlign = "left"; 
             colConfig.width = 150; 
           }
